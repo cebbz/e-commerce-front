@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <div class="grid p-20">
-    <ShopProduct v-for="product in products" :product="product" />
+    <ShopProduct v-for="product in products" :product="product" :key="product.id" />
   </div>
 </template>
 
