@@ -36,6 +36,8 @@ import Cart from './components/Cart/Cart.vue';
 
 .cart {
   grid-area: cart;
+  border-left: var(--border);
+  background-color: white;
 }
 
 .footer {
