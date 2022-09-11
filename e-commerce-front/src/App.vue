@@ -23,13 +23,17 @@ function addProductToCart(productId: number): void {
     state.cart.push({ ...product });
   }
 }
+
+function removeProductFromCart(productId: number) {
+  state.cart = state.cart.filter((product) => product.id !== productId);
+}
 </script>
   
 <template>
   <div class="app-container">
     <TheHeader class="header" />
     <Shop :products="state.products" @add-product-to-cart="addProductToCart" class="shop" />
-    <Cart class="cart" />
+    <Cart :cart="state.cart" @remove-product-from-cart="removeProductFromCart" class="cart" />
     <TheFooter class="footer" />
   </div>
 </template>
