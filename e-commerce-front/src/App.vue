@@ -6,7 +6,7 @@ import Cart from './components/Cart/Cart.vue';
 import data from './data/product';
 
 import { reactive } from 'vue';
-import type { ProductInterface } from './interfaces/Product.interface';
+import type { ProductInterface } from '@/interfaces/Product.interface';
 
 const state = reactive<{
   products: ProductInterface[];
