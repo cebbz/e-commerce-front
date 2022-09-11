@@ -19,7 +19,6 @@ const state = reactive<{
 function addProductToCart(productId: number): void {
   const product = state.products.find((product) => product.id === productId);
   if (product && !state.cart.find((product) => product.id === productId)) {
-    console.log('add product to cart', { ...product });
     state.cart.push({ ...product });
   }
 }
