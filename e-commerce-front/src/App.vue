@@ -8,13 +8,27 @@ import data from './data/product';
 import { reactive } from 'vue';
 import type { ProductInterface } from './interfaces/Product.interface';
 
-const products = reactive<ProductInterface[]>(data);
+const state = reactive<{
+  products: ProductInterface[];
+  cart: ProductInterface[];
+}>({
+  products: data,
+  cart: []
+});
+
+function addProductToCart(productId: number): void {
+  const product = state.products.find((product) => product.id === productId);
+  if (product && !state.cart.find((product) => product.id === productId)) {
+    console.log('add product to cart', { ...product });
+    state.cart.push({ ...product });
+  }
+}
 </script>
   
 <template>
   <div class="app-container">
     <TheHeader class="header" />
-    <Shop :products="products" class="shop" />
+    <Shop :products="state.products" @add-product-to-cart="addProductToCart" class="shop" />
     <Cart class="cart" />
     <TheFooter class="footer" />
   </div>

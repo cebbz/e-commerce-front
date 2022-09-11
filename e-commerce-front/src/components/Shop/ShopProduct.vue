@@ -4,6 +4,10 @@ import type { ProductInterface } from '@/interfaces/Product.interface';
 defineProps<{
     product: ProductInterface;
 }>();
+
+const emit = defineEmits<{
+    (event: 'add-product-to-cart', productId: number): void;
+}>();
 </script>
 
 <template>
@@ -15,7 +19,8 @@ defineProps<{
             <p>{{ product.description }}</p>
             <div class="d-flex flex-row align-items-center">
                 <strong class="flex-fill">Prix : {{ product.price }}€</strong>
-                <button class="btn btn-primary">Ajouter au panier</button>
+                <button class="btn btn-primary" @click="emit('add-product-to-cart', product.id)">Ajouter au
+                    panier</button>
             </div>
         </div>
     </div>
