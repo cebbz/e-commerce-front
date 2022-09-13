@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import type { ProductInterface, FilterUpdate, FiltersInterface } from '@/interfaces';
-import ShopProductList from "./ShopProductList.vue";
-import ShopFilters from "./ShopFilters.vue";
+import type {
+    FiltersInterface,
+    ProductInterface,
+    FilterUpdate,
+} from '../../interfaces';
+import ShopProductList from './ShopProductList.vue';
+import ShopFilters from './ShopFilters.vue';
 
 defineProps<{
     products: ProductInterface[];
@@ -9,19 +13,20 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-    (event: 'add-product-to-cart', productId: number): void;
-    (event: 'update-filter', updateFilter: FilterUpdate): void;
+    (e: 'addProductToCart', productId: number): void;
+    (e: 'updateFilter', updateFilter: FilterUpdate): void;
 }>();
 </script>
-
+    
 <template>
     <div class="d-flex flex-row">
-        <ShopFilters :filters="filters" @update-filter="emit('update-filter', $event)" class="shop-filter" />
-        <ShopProductList :products="products" @add-product-to-cart="emit('add-product-to-cart', $event)"
-            class="flex-fill" />
+        <ShopFilters :filters="filters" :nbr-of-products="products.length" @update-filter="emit('updateFilter', $event)"
+            class="shop-filter" />
+        <ShopProductList class="flex-fill" @add-product-to-cart="emit('addProductToCart', $event)"
+            :products="products" />
     </div>
 </template>
-
+    
 <style lang="scss" scoped>
 .shop-filter {
     flex: 0 0 200px;
