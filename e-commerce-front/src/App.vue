@@ -79,6 +79,7 @@ const filteredProducts = computed(() => {
     }
   });
 });
+
 </script>
   
 <template>
@@ -87,7 +88,7 @@ const filteredProducts = computed(() => {
   }">
     <TheHeader class="header" />
     <Shop @update-filter="updateFilter" :products="filteredProducts" @add-product-to-cart="addProductToCart"
-      class="shop" />
+      :filters="state.filters" class="shop" />
     <Cart v-if="!cartEmpty" :cart="state.cart" class="cart" @remove-product-from-cart="removeProductFromCart" />
     <TheFooter class="footer" />
   </div>
