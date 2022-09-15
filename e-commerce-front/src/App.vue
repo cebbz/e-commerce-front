@@ -22,14 +22,16 @@ function navigate(page: Page): void {
   state.page = page;
 }
 
-  // seed('projetproducts'); N’oubliez pas de commenter !
+//seed('projetproducts');
 </script>
   
 <template>
   <div class="app-container">
     <TheHeader @navigate="navigate" :page="state.page" class="header" />
     <div class="app-content">
-      <Component :is="pages[state.page]" />
+      <Suspense>
+        <Component :is="pages[state.page]" />
+      </Suspense>
     </div>
     <TheFooter class="footer" />
   </div>

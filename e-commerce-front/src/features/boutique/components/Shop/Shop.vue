@@ -3,7 +3,7 @@ import type {
     FiltersInterface,
     ProductInterface,
     FilterUpdate,
-} from '../../interfaces';
+} from '@/interfaces';
 import ShopProductList from './ShopProductList.vue';
 import ShopFilters from './ShopFilters.vue';
 
@@ -13,7 +13,7 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
-    (e: 'addProductToCart', productId: number): void;
+    (e: 'addProductToCart', productId: string): void;
     (e: 'updateFilter', updateFilter: FilterUpdate): void;
 }>();
 </script>

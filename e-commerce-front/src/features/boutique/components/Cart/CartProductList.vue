@@ -7,7 +7,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-    'remove-product-from-cart': (productId: number) => void;
+    'remove-product-from-cart': (productId: string) => void;
 }>();
 </script>
     

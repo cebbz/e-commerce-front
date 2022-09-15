@@ -1,31 +1,39 @@
 <script setup lang="ts">
 import Shop from './components/Shop/Shop.vue';
 import Cart from './components/Cart/Cart.vue';
-import data from '../../data/product';
 import { computed, reactive } from 'vue';
 import type {
     FiltersInterface,
     ProductCartInterface,
     ProductInterface,
     FilterUpdate,
-} from '@/interfaces';
-import { DEFAULT_FILTERS } from '../../data/filters';
+} from '../../interfaces';
+import { DEFAULT_FILTERS } from './data/filters';
 
 const state = reactive<{
     products: ProductInterface[];
     cart: ProductCartInterface[];
     filters: FiltersInterface;
 }>({
-    products: data,
+    products: [],
     cart: [],
     filters: { ...DEFAULT_FILTERS },
 });
 
-function addProductToCart(productId: number): void {
-    const product = state.products.find((product) => product.id === productId);
+const products = await (
+    await fetch('https://restapi.fr/api/projetproducts')
+).json();
+if (Array.isArray(products)) {
+    state.products = products;
+} else {
+    state.products = [products];
+}
+
+function addProductToCart(productId: string): void {
+    const product = state.products.find((product) => product._id === productId);
     if (product) {
         const productInCart = state.cart.find(
-            (product) => product.id === productId
+            (product) => product._id === productId
         );
         if (productInCart) {
             productInCart.quantity++;
@@ -35,12 +43,12 @@ function addProductToCart(productId: number): void {
     }
 }
 
-function removeProductFromCart(productId: number): void {
+function removeProductFromCart(productId: string): void {
     const productFromCart = state.cart.find(
-        (product) => product.id === productId
+        (product) => product._id === productId
     );
     if (productFromCart?.quantity === 1) {
-        state.cart = state.cart.filter((product) => product.id !== productId);
+        state.cart = state.cart.filter((product) => product._id !== productId);
     } else {
         productFromCart!.quantity--;
     }
@@ -87,7 +95,7 @@ const filteredProducts = computed(() => {
     </div>
 </template>
     
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .boutique-container {
     display: grid;
     grid-template-columns: 75% 25%;
