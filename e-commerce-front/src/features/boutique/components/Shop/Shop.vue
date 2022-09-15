@@ -22,12 +22,17 @@ const emit = defineEmits<{
     <div class="d-flex flex-row">
         <ShopFilters :filters="filters" :nbr-of-products="products.length" @update-filter="emit('updateFilter', $event)"
             class="shop-filter" />
-        <ShopProductList class="flex-fill" @add-product-to-cart="emit('addProductToCart', $event)"
+        <ShopProductList class="flex-fill scrollable" @add-product-to-cart="emit('addProductToCart', $event)"
             :products="products" />
     </div>
 </template>
     
 <style lang="scss" scoped>
+.scrollable {
+    overflow-y: auto;
+    height: calc(100vh - 96px);
+}
+
 .shop-filter {
     flex: 0 0 200px;
 }
