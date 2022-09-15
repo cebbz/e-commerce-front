@@ -4,7 +4,7 @@
     <header class="px-20 d-flex flex-row align-items-center">
         <a href="#" class="d-flex flex-row align-items-center mr-20">
             <img src="../assets/logo.svg" />
-            <span class="logo">Cebbz</span>
+            <span class="logo">e-com-vue</span>
         </a>
         <ul class="d-flex flex-row flex-fill">
             <li class="mr-10">
