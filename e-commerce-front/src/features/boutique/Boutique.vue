@@ -87,7 +87,7 @@ const filteredProducts = computed(() => {
     </div>
 </template>
     
-<style lang="scss">
+<style lang="scss" scoped>
 .boutique-container {
     display: grid;
     grid-template-columns: 75% 25%;
