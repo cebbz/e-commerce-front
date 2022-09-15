@@ -1,3 +1,4 @@
 export * from './Product.interface';
-export * from './ProductCartInterface';
+export * from './ProductCart.Interface';
 export * from './Filters.interface';
+export * from './type';
