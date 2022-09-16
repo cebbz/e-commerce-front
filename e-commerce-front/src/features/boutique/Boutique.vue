@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import Shop from './components/Shop/Shop.vue';
 import Cart from './components/Cart/Cart.vue';
-import { computed, reactive } from 'vue';
+import { computed, reactive, watchEffect } from 'vue';
 import type {
     FiltersInterface,
     ProductCartInterface,
     ProductInterface,
     FilterUpdate,
-} from '../../interfaces';
+} from '@/interfaces';
 import { DEFAULT_FILTERS } from './data/filters';
+import { fetchProducts } from '@/shared/services/product.service';
 
 const state = reactive<{
     products: ProductInterface[];
@@ -20,14 +21,14 @@ const state = reactive<{
     filters: { ...DEFAULT_FILTERS },
 });
 
-const products = await (
-    await fetch('https://restapi.fr/api/projetproducts')
-).json();
-if (Array.isArray(products)) {
-    state.products = products;
-} else {
-    state.products = [products];
-}
+watchEffect(async () => {
+    const products = await fetchProducts(state.filters);
+    if (Array.isArray(products)) {
+        state.products = [...state.products, ...products];
+    } else {
+        state.products = [products];
+    }
+});
 
 function addProductToCart(productId: string): void {
     const product = state.products.find((product) => product._id === productId);
@@ -110,3 +111,4 @@ const filteredProducts = computed(() => {
     border-left: var(--border);
 }
 </style>
+    
