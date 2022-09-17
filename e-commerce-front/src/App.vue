@@ -22,8 +22,8 @@ function navigate(page: Page): void {
   state.page = page;
 }
 
-//seed('vueprojectproducts')
-//seed40articles('vueprojectproducts');
+  // seed('vueprojectproducts')
+  // seed40articles('vueprojectproducts');
 </script>
   
 <template>
@@ -34,7 +34,7 @@ function navigate(page: Page): void {
         <Component :is="pages[state.page]" />
       </Suspense>
     </div>
-    <TheFooter class="footer" />
+    <TheFooter class="footer hide-xs" />
   </div>
 </template>
   

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Page } from '../interfaces';
 import { reactive } from 'vue';
+import Calc from './Calc.vue';
 
 const state = reactive<{
     open: boolean;
@@ -21,7 +22,7 @@ const emit = defineEmits<{
     <header class="px-20 d-flex flex-row align-items-center">
         <a href="#" class="d-flex flex-row align-items-center mr-20">
             <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg" />
-            <span class="logo">Dyma</span>
+            <span class="logo">e-com-vue</span>
         </a>
         <div class="d-flex flex-row align-items-center flex-fill actions-container">
             <ul class="d-flex flex-row flex-fill hide-xs flex-fill">
@@ -41,6 +42,7 @@ const emit = defineEmits<{
                 </li>
             </ul>
             <div class="menu-xs-container">
+                <Calc :open="state.open" @close="state.open = false" :transparent="true" />
                 <i @click="state.open = !state.open" class="fa-solid fa-bars show-xs"></i>
                 <Transition>
                     <ul @click="state.open = false" v-if="state.open" class="menu card">
@@ -110,6 +112,7 @@ header {
     }
 
     .menu {
+        z-index: 2;
         position: absolute;
         top: 20px;
         right: 0px;
