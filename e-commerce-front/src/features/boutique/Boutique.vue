@@ -10,7 +10,7 @@ import type {
 } from '../../interfaces';
 import { DEFAULT_FILTERS } from './data/filters';
 import { fetchProducts } from '../../shared/services/product.service';
-import { pageKey } from '@/shared/injectionKeys/pageKeys';
+import { pageKey } from '@/shared/injectionKeys/pageKey';
 
 const state = reactive<{
     products: ProductInterface[];
@@ -104,7 +104,7 @@ const filteredProducts = computed(() => {
 </script>
     
 <template>
-    <div class="boutique-container" :class="{ 'grid-empty': cartEmpty }">
+    <div class="d-flex flex-column">
         <Shop @update-filter="updateFilter" @add-product-to-cart="addProductToCart" @inc-page="state.page++"
             :products="filteredProducts" :filters="state.filters" :more-results="state.moreResults" class="shop" />
         <Cart v-if="!cartEmpty" :cart="state.cart" class="cart" @remove-product-from-cart="removeProductFromCart" />
@@ -112,17 +112,5 @@ const filteredProducts = computed(() => {
 </template>
     
 <style scoped lang="scss">
-.boutique-container {
-    display: grid;
-    grid-template-columns: 75% 25%;
-}
 
-.grid-empty {
-    grid-template-columns: 100%;
-}
-
-.cart {
-    background-color: white;
-    border-left: var(--border);
-}
 </style>
